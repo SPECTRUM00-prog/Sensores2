@@ -20,10 +20,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var tvValores: TextView
     private lateinit var tvEstado: TextView
 
-    // Objeto que permite ocupar cualquier sensor
     private lateinit var sensorManager: SensorManager
 
-    // Atributo que permite ocupar un sensor en particular
     private var sensorluz: Sensor? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
