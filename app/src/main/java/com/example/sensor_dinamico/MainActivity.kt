@@ -15,13 +15,12 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
-    private lateinit var LayoutColor: LinearLayout
+    private lateinit var layoutFondo: LinearLayout
     private lateinit var tvTitulo: TextView
     private lateinit var tvValores: TextView
     private lateinit var tvEstado: TextView
 
     private lateinit var sensorManager: SensorManager
-
     private var sensorluz: Sensor? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        LayoutColor = findViewById(R.id.LayoutColor)
+        layoutFondo = findViewById(R.id.layoutFondo)
         tvTitulo = findViewById(R.id.tvTitulo)
         tvValores = findViewById(R.id.tvValores)
         tvEstado = findViewById(R.id.tvEstado)
@@ -38,31 +37,28 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorluz = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
 
         if (sensorluz == null) {
-            tvEstado.text = "No hay sensor de luz :("
+            tvEstado.text = "Sensor no disponible :("
         }
     }
 
     override fun onSensorChanged(p0: SensorEvent?) {
-
         if (p0?.sensor?.type == Sensor.TYPE_LIGHT) {
-
             val luz = p0.values[0]
-
-            tvValores.text = "Luz: $luz lx"
+            tvValores.text = "Nivel: $luz lx"
 
             if (luz < 50) {
-                LayoutColor.setBackgroundColor(Color.BLACK)
+                layoutFondo.setBackgroundColor(Color.BLACK)
                 tvTitulo.setTextColor(Color.WHITE)
                 tvValores.setTextColor(Color.WHITE)
                 tvEstado.setTextColor(Color.WHITE)
-                tvEstado.text = "Modo Oscuro"
+                tvEstado.text = "Modo Oscuro - Baja luz"
 
             } else if (luz > 500) {
-                LayoutColor.setBackgroundColor(Color.WHITE)
+                layoutFondo.setBackgroundColor(Color.WHITE)
                 tvTitulo.setTextColor(Color.BLACK)
                 tvValores.setTextColor(Color.BLACK)
                 tvEstado.setTextColor(Color.BLACK)
-                tvEstado.text = "Modo Claro"
+                tvEstado.text = "Modo Claro - Luz alta"
             }
         }
     }
@@ -72,7 +68,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onResume() {
         super.onResume()
-
         sensorluz?.let {
             sensorManager.registerListener(
                 this,
@@ -80,10 +75,5 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 SensorManager.SENSOR_DELAY_NORMAL
             )
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        sensorManager.unregisterListener(this)
     }
 }
