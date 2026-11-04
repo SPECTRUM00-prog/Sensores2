@@ -8,37 +8,37 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/layoutFondo"
+        android:id="@+id/contenedorPrincipal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="24dp">
 
         <TextView
             android:id="@+id/tvTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Prueba Sensor de Luz"
+            android:text="Sensor Prueba"
             android:textStyle="bold"
-            android:textSize="24sp" />
+            android:textSize="26sp" />
 
         <TextView
             android:id="@+id/tvValores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Nivel: 0 lx"
-            android:textSize="18sp" />
+            android:layout_marginTop="20dp"
+            android:text="Lectura de luz"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tvEstado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="Esperando lectura..."
-            android:textSize="22sp" />
+            android:layout_marginTop="32dp"
+            android:text="Estado: Sin datos"
+            android:textSize="20sp" />
 
     </LinearLayout>
-
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
