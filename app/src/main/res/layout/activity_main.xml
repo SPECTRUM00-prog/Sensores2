@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/LayoutColor"
+        android:id="@+id/layoutFondo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -19,25 +19,25 @@
             android:id="@+id/tvTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Uso del Sensor de Luz"
+            android:text="Prueba Sensor de Luz"
             android:textStyle="bold"
-            android:textSize="25sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tvValores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Luz: 0 lx"
-            android:textSize="20sp" />
+            android:layout_marginTop="16dp"
+            android:text="Nivel: 0 lx"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvEstado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:textSize="22sp"
-            android:text="Modo actual" />
+            android:layout_marginTop="28dp"
+            android:text="Esperando lectura..."
+            android:textSize="22sp" />
 
     </LinearLayout>
 
