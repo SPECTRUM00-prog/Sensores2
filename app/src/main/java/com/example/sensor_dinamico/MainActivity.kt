@@ -15,61 +15,61 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
-    private lateinit var layoutFondo: LinearLayout
+    private lateinit var contenedorPrincipal: LinearLayout
     private lateinit var tvTitulo: TextView
     private lateinit var tvValores: TextView
     private lateinit var tvEstado: TextView
 
-    private lateinit var sensorManager: SensorManager
-    private var sensorluz: Sensor? = null
+    private lateinit var sManager: SensorManager
+    private var miSensor: Sensor? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        layoutFondo = findViewById(R.id.layoutFondo)
+        contenedorPrincipal = findViewById(R.id.contenedorPrincipal)
         tvTitulo = findViewById(R.id.tvTitulo)
         tvValores = findViewById(R.id.tvValores)
         tvEstado = findViewById(R.id.tvEstado)
 
-        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        sensorluz = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+        sManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        miSensor = sManager.getDefaultSensor(Sensor.TYPE_LIGHT)
 
-        if (sensorluz == null) {
-            tvEstado.text = "Sensor no disponible :("
+        if (miSensor == null) {
+            tvEstado.text = "Sin sensor de luz"
         }
     }
 
-    override fun onSensorChanged(p0: SensorEvent?) {
-        if (p0?.sensor?.type == Sensor.TYPE_LIGHT) {
-            val luz = p0.values[0]
-            tvValores.text = "Nivel: $luz lx"
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event?.sensor?.type == Sensor.TYPE_LIGHT) {
+            val lux = event.values[0]
+            tvValores.text = "Luz actual: $lux lx"
 
-            if (luz < 50) {
-                layoutFondo.setBackgroundColor(Color.BLACK)
+            if (lux < 50) {
+                contenedorPrincipal.setBackgroundColor(Color.BLACK)
                 tvTitulo.setTextColor(Color.WHITE)
                 tvValores.setTextColor(Color.WHITE)
                 tvEstado.setTextColor(Color.WHITE)
-                tvEstado.text = "Modo Oscuro - Baja luz"
+                tvEstado.text = "Modo Oscuro (Poca Luz)"
 
-            } else if (luz > 500) {
-                layoutFondo.setBackgroundColor(Color.WHITE)
+            } else if (lux > 500) {
+                contenedorPrincipal.setBackgroundColor(Color.WHITE)
                 tvTitulo.setTextColor(Color.BLACK)
                 tvValores.setTextColor(Color.BLACK)
                 tvEstado.setTextColor(Color.BLACK)
-                tvEstado.text = "Modo Claro - Luz alta"
+                tvEstado.text = "Modo Claro (Mucha Luz)"
             }
         }
     }
 
-    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
 
     override fun onResume() {
         super.onResume()
-        sensorluz?.let {
-            sensorManager.registerListener(
+        miSensor?.let {
+            sManager.registerListener(
                 this,
                 it,
                 SensorManager.SENSOR_DELAY_NORMAL
